@@ -1,23 +1,23 @@
 // background.js
 
-// Initialize the count when the extension is first installed or loaded
+// Initialize the count and times when the extension is first installed or loaded
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.local.set({ shortVideoCount: 0 });
+  chrome.storage.local.set({ shortVideoCount: 0, watchedTimes: [] });
 });
 
-// Update the count in local storage when a short video is played
-function incrementCounter() {
-  chrome.storage.local.get('shortVideoCount', (data) => {
+// Update the count and times in local storage when a short video is played
+function incrementCounterAndTimes(time) {
+  chrome.storage.local.get(['shortVideoCount', 'watchedTimes'], (data) => {
     const count = data.shortVideoCount || 0;
-    chrome.storage.local.set({ shortVideoCount: count + 1 });
+    const times = data.watchedTimes || [];
+    chrome.storage.local.set({ shortVideoCount: count + 1, watchedTimes: [...times, time] });
   });
 }
 
 // Listen for messages from the content script
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "videoWatched") {
-    incrementCounter();
-    
+    incrementCounterAndTimes(message.time);
     // Send a response to the content script to acknowledge the message
     return true;
   }

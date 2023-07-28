@@ -42,3 +42,14 @@ p {
     border-radius: 10px;
     background-color: rgb(147, 147, 147);
 }
+
+#myList {
+    margin: 25px;
+    padding: 20px;
+}
+
+li {
+    font-size: 20px;
+    margin: 5px;
+    padding-bottom: 5px;
+}

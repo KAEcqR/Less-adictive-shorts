@@ -6,12 +6,17 @@ function isShortVideo() {
   return window.location.href.includes("/shorts/");
 }
 
-// Send a message to the background script when a video is watched
-function sendMessageToBackground() {
+// Send a message to the background script with the current time when a video is watched
+function sendMessageToBackground(time) {
   if (isShortVideo()) {
-    chrome.runtime.sendMessage({ action: "videoWatched" });
+    chrome.runtime.sendMessage({ action: "videoWatched", time });
   }
 }
 
 // Listen for video play events
-document.addEventListener('play', sendMessageToBackground, true);
+document.addEventListener('play', () => {
+  if (isShortVideo()) {
+    const currentTime = new Date().toLocaleTimeString();
+    sendMessageToBackground(currentTime);
+  }
+}, true);
