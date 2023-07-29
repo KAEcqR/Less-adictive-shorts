@@ -2,19 +2,7 @@
 
 // Function to update the counter in the popup
 function updateCounter(count) {
-  document.getElementById('counter').textContent = `Shorts Watched: ${count}`;
-}
-
-// Function to display the list of watched times
-function displayWatchedTimes(times) {
-  const ulElement = document.getElementById("myList");
-  ulElement.innerHTML = ""; // Clear existing items
-
-  times.forEach((time) => {
-    const newListItem = document.createElement("li");
-    newListItem.textContent = time;
-    ulElement.appendChild(newListItem);
-  });
+  document.getElementById('counter').textContent = `Total Youtube Shorts Watched: ${count}`;
 }
 
 // Get the count and watchedTimes from local storage and display them on the popup page
@@ -23,7 +11,7 @@ function updateDisplay() {
     const count = data.shortVideoCount || 0;
     const times = data.watchedTimes || [];
     updateCounter(count);
-    displayWatchedTimes(times);
+    loadAndDrawChart(times); // Load and draw the chart with the new data
   });
 }
 
@@ -85,11 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // Function to update the counter and redraw the chart in the popup
 function updateCounterAndChart(count, times) {
   updateCounter(count);
-  displayWatchedTimes(times);
   loadAndDrawChart(times);
 }
-
-// ... (existing code)
 
 // Listen for messages from background.js
 chrome.runtime.onMessage.addListener((message) => {

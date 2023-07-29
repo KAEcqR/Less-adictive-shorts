@@ -32,6 +32,7 @@ function incrementCounterAndTimes(time) {
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "videoWatched") {
     incrementCounterAndTimes(message.time);
+    updateCounterAndChart();
     // Send a response to the content script to acknowledge the message
     return true;
   }
