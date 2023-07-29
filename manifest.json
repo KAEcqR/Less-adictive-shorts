@@ -4,7 +4,7 @@
   "version": "1.0",
   "description": "Counts the shorts watched on YouTube.",
   "author": "Kacper - KAEcqR",
-  "permissions": ["tabs", "storage", "activeTab"],
+  "permissions": ["tabs", "storage", "activeTab", "webNavigation"],
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/*"],
@@ -28,5 +28,5 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "content_security_policy": "script-src 'self' https://cdn.jsdelivr.net/ blob: filesystem:; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://cdn.jsdelivr.net/ https://www.gstatic.com/ blob: filesystem: 'unsafe-eval'; object-src 'self'"
 }

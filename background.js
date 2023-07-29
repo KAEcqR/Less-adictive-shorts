@@ -5,12 +5,26 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.set({ shortVideoCount: 0, watchedTimes: [] });
 });
 
+// Function to update the counter and redraw the chart
+function updateCounterAndChart() {
+  chrome.storage.local.get(['shortVideoCount', 'watchedTimes'], (data) => {
+    const count = data.shortVideoCount || 0;
+    const times = data.watchedTimes || [];
+
+    // Send message to popup.js to update counter and redraw chart
+    chrome.runtime.sendMessage({ action: "updateCounterAndChart", count, times });
+  });
+}
+
 // Update the count and times in local storage when a short video is played
 function incrementCounterAndTimes(time) {
   chrome.storage.local.get(['shortVideoCount', 'watchedTimes'], (data) => {
     const count = data.shortVideoCount || 0;
     const times = data.watchedTimes || [];
     chrome.storage.local.set({ shortVideoCount: count + 1, watchedTimes: [...times, time] });
+
+    // Update the counter and redraw the chart
+    updateCounterAndChart();
   });
 }
 

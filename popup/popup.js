@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function appendListItem(content) {
   const ulElement = document.getElementById("myList");
-  console.log(ulElement)
   if (ulElement) {
     const newListItem = document.createElement("li");
     newListItem.textContent = content; 
@@ -70,6 +69,33 @@ chrome.runtime.onMessage.addListener((message) => {
     const Time = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`
 
     appendListItem(Time);
+    return true;
+  }
+});
+
+// Set up event listener for the reload button after the DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('reloadButton').addEventListener('click', handleReloadButtonClick);
+
+  // Initialize the counter display and load/draw the chart when the popup is opened
+  updateDisplay();
+  loadAndDrawChart([]); // Load and draw an empty chart initially
+});
+
+// Function to update the counter and redraw the chart in the popup
+function updateCounterAndChart(count, times) {
+  updateCounter(count);
+  displayWatchedTimes(times);
+  loadAndDrawChart(times);
+}
+
+// ... (existing code)
+
+// Listen for messages from background.js
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === "updateCounterAndChart") {
+    const { count, times } = message;
+    updateCounterAndChart(count, times);
     return true;
   }
 });
