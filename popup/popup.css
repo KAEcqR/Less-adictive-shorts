@@ -1,13 +1,21 @@
+:root{
+    --text: #f3fbfb;
+    --background: #050f0f;
+    --primary: #1b5055;
+    --secondary: #0a1d1f;
+    --accent: #3baeb9;
+}
+
 html {
-    background-color: rgb(255, 255, 255);
     width: 500px;
-    height: 300px;
+    height: 555px;
 }
 
 h1 {
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-top: 50px;
 }
 
 p {
@@ -43,13 +51,7 @@ p {
     background-color: rgb(147, 147, 147);
 }
 
-#myList {
-    margin: 25px;
-    padding: 20px;
-}
-
-li {
-    font-size: 20px;
-    margin: 5px;
-    padding-bottom: 5px;
+#chart_div {
+    margin-top: 50px;
+    padding-bottom: 50px;
 }

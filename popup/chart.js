@@ -47,7 +47,8 @@ function drawChart(watchedTimes) {
     legend: { position: 'none' },
     chartArea: { width: '80%', height: '70%' },
     colors: ['#4285F4'],
-    vAxis: { title: 'Hour' }, // Set format to '0' to display only integers
+    backgroundColor: '#00000',
+    vAxis: { title: '' }, // Set format to '0' to display only integers
     hAxis: { title: 'Shorts watched', format: '0' },
     bars: 'vertical',
     animation: {

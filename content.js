@@ -18,5 +18,32 @@ document.addEventListener('play', () => {
   if (isShortVideo()) {
     const currentTime = new Date().toLocaleTimeString();
     sendMessageToBackground(currentTime);
+
+
+
+    // overlay();
   }
 }, true);
+
+//todo DO ZROBIENIA : OVERLAY 
+
+// chrome.runtime.onMessage.addListener((message) => {
+//   if (message.action === "SetOverlay") {
+//     overlay('<h1>Wiadomosc</h1>')
+
+//     // Send a response to the content script to acknowledge the message
+//     return true;
+//   }
+// });
+
+// const overlay = function(content){
+//   if(document.querySelector(".myOverlay")){
+//     const lastOverlay = document.querySelector(".myOverlay");
+//     lastOverlay.remove();
+//   };
+
+//   const injectElement = document.createElement('div');
+//   injectElement.className = 'myOverlay';
+//   injectElement.innerHTML = `${content}`;
+//   document.body.appendChild(injectElement);
+// }

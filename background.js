@@ -3,6 +3,7 @@
 // Initialize the count and times when the extension is first installed or loaded
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.set({ shortVideoCount: 0, watchedTimes: [] });
+  chrome.runtime.sendMessage({ action: "SetOverlay" });
 });
 
 // Function to update the counter and redraw the chart
@@ -13,6 +14,7 @@ function updateCounterAndChart() {
 
     // Send message to popup.js to update counter and redraw chart
     chrome.runtime.sendMessage({ action: "updateCounterAndChart", count, times });
+    chrome.runtime.sendMessage({ action: "SetOverlay", count });
   });
 }
 
