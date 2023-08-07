@@ -9,7 +9,7 @@
     {
       "matches": ["https://www.youtube.com/*"],
       "js": ["content.js"],
-      "css": ["main.css"]
+      "css": ["main.css", "overlay/overlay.css"]
     }
   ],
   "background": {

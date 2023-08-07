@@ -14,7 +14,11 @@ function updateCounterAndChart() {
 
     // Send message to popup.js to update counter and redraw chart
     chrome.runtime.sendMessage({ action: "updateCounterAndChart", count, times });
-    chrome.runtime.sendMessage({ action: "SetOverlay", count });
+
+    // Send a message to the content script to update overlay
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, { action: "SetOverlay", count });
+    });
   });
 }
 

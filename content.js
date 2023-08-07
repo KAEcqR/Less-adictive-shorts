@@ -21,29 +21,34 @@ document.addEventListener('play', () => {
 
 
 
-    // overlay();
+    overlay();
   }
 }, true);
 
-//todo DO ZROBIENIA : OVERLAY 
+const overlayEnabled = true
 
-// chrome.runtime.onMessage.addListener((message) => {
-//   if (message.action === "SetOverlay") {
-//     overlay('<h1>Wiadomosc</h1>')
+const overlay = function(content) {
+  // Check if overlay is enabled
 
-//     // Send a response to the content script to acknowledge the message
-//     return true;
-//   }
-// });
+  if (document.querySelector(".myOverlay")) {
+    const lastOverlay = document.querySelector(".myOverlay");
+    lastOverlay.remove();
+  }
 
-// const overlay = function(content){
-//   if(document.querySelector(".myOverlay")){
-//     const lastOverlay = document.querySelector(".myOverlay");
-//     lastOverlay.remove();
-//   };
+  const injectElement = document.createElement('div');
+  injectElement.className = 'myOverlay';
+  injectElement.innerHTML = content;
+  document.body.appendChild(injectElement);
 
-//   const injectElement = document.createElement('div');
-//   injectElement.className = 'myOverlay';
-//   injectElement.innerHTML = `${content}`;
-//   document.body.appendChild(injectElement);
-// }
+}
+
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === "SetOverlay") {
+    const overlayContent = `<h1>Shorts Watched: ${message.count}</h1>`;
+    overlay(overlayContent);
+
+    // Send a response to the background script to acknowledge the message
+    return true;
+  }
+});
+
