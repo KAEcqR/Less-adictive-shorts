@@ -44,7 +44,7 @@ const overlay = function(content) {
 
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "SetOverlay") {
-    const overlayContent = `<h1>Shorts Watched: ${message.count}</h1>`;
+    const overlayContent = `<p>Shorts Watched: ${message.count}<p>`;
     overlay(overlayContent);
 
     // Send a response to the background script to acknowledge the message
