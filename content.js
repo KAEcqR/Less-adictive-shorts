@@ -20,12 +20,10 @@ document.addEventListener('play', () => {
     sendMessageToBackground(currentTime);
 
 
-
     overlay();
   }
 }, true);
 
-const overlayEnabled = true
 
 const overlay = function(content) {
   // Check if overlay is enabled
@@ -50,5 +48,26 @@ chrome.runtime.onMessage.addListener((message) => {
     // Send a response to the background script to acknowledge the message
     return true;
   }
+})
+
+// Make grayscale default
+
+document.querySelector("#shorts-player").classList.add("grayscale")
+
+// Toggle grayscale
+
+chrome.runtime.onMessage.addListener(function(request) {
+  if(request.action === 'grayscale') {
+      console.log(document.querySelector("#shorts-player"))
+      document.querySelector("#shorts-player").classList.toggle("grayscale");
+  }
 });
 
+// Toggle overlay
+
+chrome.runtime.onMessage.addListener(function(request) {
+  if(request.action === 'overlay') {
+      console.log(document.querySelector(".myOverlay"))
+      document.querySelector(".myOverlay").classList.toggle("disable");
+  }
+});

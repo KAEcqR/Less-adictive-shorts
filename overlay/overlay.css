@@ -4,10 +4,10 @@
     outline: 2px solid rgb(212, 212, 212);
     position: absolute;
     top: calc(50% - 400px);
-    left: 255px;
+    left: 13.5%;
     z-index: 100000000000000;
     font-size: 50px;
-    width: 470px;
+    width: 28%;
     height: 832px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
@@ -16,3 +16,72 @@
     align-items: center;
     color: white;
 }
+
+/* Makes video black and white */
+
+.grayscale{
+    filter: grayscale(100%);
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}
+
+.gray {
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    border: 1px black solid;
+    border-radius: 10px;
+    background-color: rgb(219, 219, 219);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-family: sans-serif;
+    transition: all 0.3s;
+}
+
+.gray:hover {
+    border: 1px black solid;
+    border-radius: 10px;
+    background-color: rgb(147, 147, 147);
+}
+
+.grayscale{
+    filter: grayscale(100%);
+}
+
+/* Enables overlay */
+
+.overlaybutton {
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    border: 1px black solid;
+    border-radius: 10px;
+    background-color: rgb(219, 219, 219);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-family: sans-serif;
+    transition: all 0.3s;
+}
+
+.overlaybutton:hover {
+    border: 1px black solid;
+    border-radius: 10px;
+    background-color: rgb(147, 147, 147);
+}
+
+/* Disables Overlay */
+
+.disable {
+    display: none;
+}
+

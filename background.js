@@ -1,12 +1,15 @@
 // background.js
 
 // Initialize the count and times when the extension is first installed or loaded
+
+let isVideoPlaying = false;
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.set({ shortVideoCount: 0, watchedTimes: [] });
   chrome.runtime.sendMessage({ action: "SetOverlay" });
 });
 
 // Function to update the counter and redraw the chart
+
 function updateCounterAndChart() {
   chrome.storage.local.get(['shortVideoCount', 'watchedTimes'], (data) => {
     const count = data.shortVideoCount || 0;
@@ -23,6 +26,7 @@ function updateCounterAndChart() {
 }
 
 // Update the count and times in local storage when a short video is played
+
 function incrementCounterAndTimes(time) {
   chrome.storage.local.get(['shortVideoCount', 'watchedTimes'], (data) => {
     const count = data.shortVideoCount || 0;
@@ -35,11 +39,13 @@ function incrementCounterAndTimes(time) {
 }
 
 // Listen for messages from the content script
+
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "videoWatched") {
     incrementCounterAndTimes(message.time);
     updateCounterAndChart();
     // Send a response to the content script to acknowledge the message
+
     return true;
   }
 });
