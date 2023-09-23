@@ -8,8 +8,8 @@
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/*"],
-      "js": ["content.js", "overlay/overlay.js"],
-      "css": ["main.css", "overlay/overlay.css"]
+      "js": ["content.js"],
+      "css": ["main.css"]
     }
   ],
   "background": {

@@ -5,7 +5,6 @@
 let isVideoPlaying = false;
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.set({ shortVideoCount: 0, watchedTimes: [] });
-  chrome.runtime.sendMessage({ action: "SetOverlay" });
 });
 
 // Function to update the counter and redraw the chart
@@ -18,10 +17,6 @@ function updateCounterAndChart() {
     // Send message to popup.js to update counter and redraw chart
     chrome.runtime.sendMessage({ action: "updateCounterAndChart", count, times });
 
-    // Send a message to the content script to update overlay
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id, { action: "SetOverlay", count });
-    });
   });
 }
 
